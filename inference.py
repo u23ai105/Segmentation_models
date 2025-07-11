@@ -9,7 +9,7 @@ from unet import UNet
 def pred_show_image_grid(data_path,model_pth,device):
     model=UNet(in_channels=3,num_classes=1).to(device)
     model.load_state_dict(torch.load(model_pth,map_locxation=torch.device(device)))
-    image_dataset=ImgDataset(data_path,test=True)
+    image_dataset=ImgDataset(data_path,test=True,val=False)
     images=[]
     orig_masks=[]
     pred_masks=[]

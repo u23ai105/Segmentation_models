@@ -11,10 +11,10 @@ if __name__ == "__main__":
     BATCH_SIZE=32
     EPOCHS=10
     DATA_PATH="/content/brain-tumor-image-dataset-semantic-segmentation"
-    MODEL_SAVE_PATH = '/content/gdrive/My Drive/brain_tumor_unet.pth'
+    MODEL_SAVE_PATH = "/content/gdrive/My Drive/brain_tumor_unet.pth"
     VAL_DATA_PATH="/content/brain-tumor-image-dataset-semantic-segmentation/valid"
 
-    device="cuda" if torch.cud.is_available() else "cpu"
+    device="cuda" if torch.cuda.is_available() else "cpu"
     train_dataset=ImgDataset(DATA_PATH)
     val_dataset=ImgDataset(VAL_DATA_PATH,val=True)
 

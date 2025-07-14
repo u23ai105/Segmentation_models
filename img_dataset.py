@@ -4,7 +4,7 @@ from torch.utils.data.dataset import Dataset
 from torchvision import transforms
 
 class ImgDataset(Dataset):
-    def _init__(self,root_path,test=False,val=False):
+    def __init__(self,root_path,test=False,val=False):
         self.root_path=root_path
         if test:
             self.images=sorted([os.path.join(root_path,i) for i in os.listdir(root_path)])
@@ -21,11 +21,11 @@ class ImgDataset(Dataset):
                 transforms.ToTensor()
         ])
 
-    def _getitem_(self,index):
+    def __getitem__(self,index):
         img=Image.open(self.images[index]).convert("RGB")
         mask=Image.open(self.masks[index]).convert("L")
 
         return self.transform(img),self.transform(mask)
 
-    def _len__(self):
+    def __len__(self):
         return len(self.images)

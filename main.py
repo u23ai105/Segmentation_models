@@ -1,6 +1,6 @@
 import torch
 from torch import optim,nn
-from torch.utils.data import DataLoader, random_split
+from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 from unet import UNet

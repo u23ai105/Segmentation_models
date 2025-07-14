@@ -21,10 +21,10 @@ def pred_show_image_grid(data_path,model_pth,device):
         pred_mask=model(img)
 
         img=img.squeeze(0).cpu().detach()
-        img=img.premute(1,2,0)
+        img=img.permute(1,2,0)
 
         pred_mask=pred_mask.squeeze(0).cpu().detach()
-        pred_mask=pred_mask.permute(1,2,0)
+
         pred_mask[pred_mask<0]=0
         pred_mask[pred_mask>0]=1
 
@@ -53,11 +53,11 @@ def single_image_inference(image_pth,model_pth,device):
     ])
 
     img=transform(Image.open(image_pth)).float().to(device)
-    img=img.unsqueeze()
+    img=img.unsqueeze(0)
 
     pred_mask=model(img)
 
-    img=img.squeze(0).cpu().detach()
+    img=img.squeeze(0).cpu().detach()
     img=img.permute(1,2,0)
 
     pred_mask=pred_mask.squeeze(0).cpu().detach()

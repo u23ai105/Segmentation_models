@@ -8,20 +8,19 @@ from img_dataset import ImgDataset
 
 if __name__ == "__main__":
     LEARNING_RATE=3E-4
-    BATCH_SIZE=32
+    BATCH_SIZE=16
     EPOCHS=10
     DATA_PATH="/content/brain-tumor-image-dataset-semantic-segmentation"
-    MODEL_SAVE_PATH = "/content/gdrive/My Drive/brain_tumor_unet.pth"
-    VAL_DATA_PATH="/content/brain-tumor-image-dataset-semantic-segmentation"
+    MODEL_SAVE_PATH = "/content/gdrive/My Drive/segmentation_models/brain_tumor_unet.pth"
 
     device="cuda" if torch.cuda.is_available() else "cpu"
     train_dataset=ImgDataset(DATA_PATH)
-    val_dataset=ImgDataset(VAL_DATA_PATH,val=True)
+    val_dataset=ImgDataset(DATA_PATH,val=True)
 
-    train_dataloader=DataLoader(datset=train_dataset,batch_size=BATCH_SIZE,shffle=True)
-    val_dataloader=DataLoader(datset=val_dataset,batch_size=BATCH_SIZE,shuffle=True)
+    train_dataloader=DataLoader(dataset=train_dataset,batch_size=BATCH_SIZE,shuffle=True)
+    val_dataloader=DataLoader(dataset=val_dataset,batch_size=BATCH_SIZE,shuffle=True)
 
-    model=UNet(in_channles=3,num_classes=1).to(device)
+    model=UNet(in_channels=3,num_classes=1).to(device)
     optimizer=optim.AdamW(model.parameters(),lr=LEARNING_RATE)
     criterion=nn.BCEWithLogitsLoss()
 

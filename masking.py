@@ -41,8 +41,8 @@ def generate_and_save_masks(root_path, split_name, annotation_fname, output_mask
 
 # Example usage
 generate_and_save_masks(
-    root_path="/Users/muzammilmohammad/Documents/CSAB/csab/Python/archive",
+    root_path="/content/brain-tumor-image-dataset-semantic-segmentation",
     split_name="valid",
-    annotation_fname="annotations.json",
-    output_mask_dir="/Users/muzammilmohammad/Documents/CSAB/csab/Python/archive/valid/valid_masks"
+    annotation_fname="_annotations.coco.json",
+    output_mask_dir="/content/brain-tumor-image-dataset-semantic-segmentation/valid/valid_masks"
 )

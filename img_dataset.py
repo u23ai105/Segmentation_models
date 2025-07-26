@@ -1,4 +1,7 @@
 import os
+import torch
+import cv2
+import numpy as np
 from PIL import Image
 from torch.utils.data.dataset import Dataset
 from torchvision import transforms
@@ -8,7 +11,7 @@ def is_image_file(filename):
     return filename.lower().endswith(IMG_EXTENSIONS)
 
 class ImgDataset(Dataset):
-    def __init__(self,root_path,test=False,val=False):
+    def __init__(self,root_path, transforms=None,test=False,val=False):
         if val==False and test ==False:
             image_folder = os.path.join(root_path, "train")
             mask_folder = os.path.join(root_path, "train", "train_masks")
@@ -32,16 +35,26 @@ class ImgDataset(Dataset):
             if os.path.isfile(os.path.join(mask_folder, f)) and is_image_file(f)
         ])
 
-        self.transform=transforms.Compose([
-                transforms.Resize((572,572)),
-                transforms.ToTensor()
-        ])
+        # Slice the lists to only include the first 20 files.
+        self.images = self.images[:20]
+        self.masks = self.masks[:20]
 
-    def __getitem__(self,index):
-        img=Image.open(self.images[index]).convert("RGB")
-        mask=Image.open(self.masks[index]).convert("L")
+        self.transform=transforms
 
-        return self.transform(img),self.transform(mask)
+    def __getitem__(self, index):
+        img = Image.open(self.images[index]).convert("RGB")
+        mask = Image.open(self.masks[index])
+
+        if self.transform:
+            augmented = self.transform(image=np.array(img), mask=np.array(mask))
+            img = augmented["image"]
+            mask = augmented["mask"]
+
+        if mask.max() > 1.0:
+            mask = mask / 255.0
+        mask = mask.unsqueeze(0)
+
+        return img, mask
 
     def __len__(self):
         return len(self.images)

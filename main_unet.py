@@ -8,7 +8,7 @@ from img_dataset import ImgDataset
 
 if __name__ == "__main__":
     LEARNING_RATE=3E-4
-    BATCH_SIZE=16
+    BATCH_SIZE=4
     EPOCHS=10
     DATA_PATH="/content/brain-tumor-image-dataset-semantic-segmentation"
     MODEL_SAVE_PATH = "/content/gdrive/My Drive/segmentation_models/brain_tumor_unet.pth"

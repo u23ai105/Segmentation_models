@@ -44,19 +44,19 @@ generate_and_save_masks(
     root_path="/content/brain-tumor-image-dataset-semantic-segmentation",
     split_name="valid",
     annotation_fname="_annotations.coco.json",
-    output_mask_dir="/content/brain-tumor-image-dataset-semantic-segmentation/valid/valid_masks"
+    output_mask_dir="/content/brain-tumor-image-dataset-semantic-segmentation/valid_masks"
 )
 
 generate_and_save_masks(
     root_path="/content/brain-tumor-image-dataset-semantic-segmentation",
     split_name="test",
     annotation_fname="_annotations.coco.json",
-    output_mask_dir="/content/brain-tumor-image-dataset-semantic-segmentation/test/test_masks"
+    output_mask_dir="/content/brain-tumor-image-dataset-semantic-segmentation/test_masks"
 )
 
 generate_and_save_masks(
     root_path="/content/brain-tumor-image-dataset-semantic-segmentation",
     split_name="train",
     annotation_fname="_annotations.coco.json",
-    output_mask_dir="/content/brain-tumor-image-dataset-semantic-segmentation/train/train_masks"
+    output_mask_dir="/content/brain-tumor-image-dataset-semantic-segmentation/train_masks"
 )
